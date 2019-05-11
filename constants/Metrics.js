@@ -1,7 +1,11 @@
+import { Constants } from 'expo';
+
 export default {
   padding: 15,
+  statusBarMargin: Constants.statusBarHeight,
+  defaultBorderRadius: 23,
+
   inputHeight: 45,
   inputPaddingHorizontal: 20,
-  inputBackgoundColor: '#f6f6f8',
-  inputBorderRadius: 23,
 };
+
