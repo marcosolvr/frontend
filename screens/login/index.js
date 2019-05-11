@@ -32,11 +32,10 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.logo}>
-          <Image
-            source={require('../../assets/images/logo.png')}
-          />
-        </View>
+        <Image
+          style={styles.logo}
+          source={require('../../assets/images/logo.png')}
+        />
         
         <TextInput
           style={styles.input}

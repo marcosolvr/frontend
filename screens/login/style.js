@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     marginTop: metrics.statusBarMargin,
   },
   logo: {
-    alignItems: 'center',
+    alignSelf: 'center',
     marginVertical: 70,
   },
   input: {
