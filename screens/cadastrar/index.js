@@ -6,20 +6,16 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { WebBrowser } from 'expo';
 
 import styles from './style';
 
 export default class App extends React.Component {
   state = {
+    username: 'marcos',
     email: 'marcos@abreu.com',
     senha: 'nvkdlsnv',
+    senhaDois: 'nvkdjl',
   };
-
-  _handlePressButtonSocial = async () => {
-    let result = await WebBrowser.openBrowserAsync('https://expo.io');
-  }
 
   handlerChangeEmail = (text) => {
     this.setState({ email: text });
@@ -29,8 +25,16 @@ export default class App extends React.Component {
     this.setState({ senha: text });
   }
 
-  _cadastrar = () => {
-    this.props.navigation.navigate('Cadastrar');
+  handlerChangeSenhaDois = (text) => {
+    this.setState({ senhaDois: text });
+  }
+
+  handlerChangeUsername = (text) => {
+    this.setState({ username: text });
+  }
+
+  _login = () => {
+    this.props.navigation.navigate('Login');
   }
 
   render() {
@@ -41,6 +45,15 @@ export default class App extends React.Component {
           source={require('../../assets/images/logo.png')}
         />
         
+        <TextInput
+          style={styles.input}
+          placeholder="Nome de usuário"
+          value={this.state.username}
+          onChangeText={this.handlerChangeUsername}
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+
         <TextInput
           style={styles.input}
           placeholder="Endereço de e-mail"
@@ -60,38 +73,28 @@ export default class App extends React.Component {
           secureTextEntry
         />
 
-        <Text style={styles.errorMessage}>Ocorreu algum problema no login.</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Repita sua senha"
+          value={this.state.senhaDois}
+          onChangeText={this.handlerChangeSenhaDois}
+          autocapitalize="none"
+          autoCorrect={false}
+          secureTextEntry
+        />
+
+        <Text style={styles.errorMessage}>Ocorreu algum problema no cadastro.</Text>
 
         <TouchableOpacity onPress={() => {}} style={styles.button}>
-          <Text style={styles.buttonText}>LOGIN</Text>
+          <Text style={styles.buttonText}>CRIAR CONTA</Text>
         </TouchableOpacity>
 
-        <Text style={styles.alternativasTitle}>OU</Text>
-
-        <View style={styles.socialLogin}>
-          <TouchableOpacity onPress={this._handlePressButtonSocial}>
-            <Ionicons
-              style={{ marginRight: 30 }}
-              name="logo-facebook"
-              size={50}
-              color="#7c80f8"
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Ionicons
-              name="logo-google"
-              size={50}
-              color="#7c80f8"
-            />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.criarContaText}>
-          <Text>Não possui uma conta?</Text>
+        <View style={styles.fazerLoginText}>
+          <Text>Já possui uma conta?</Text>
           <TouchableOpacity
-            onPress={this._cadastrar}
+            onPress={this._login}
           >
-            <Text style={styles.criarContaButton}>Criar conta.</Text>
+            <Text style={styles.fazerLoginButton}>Fazer login.</Text>
           </TouchableOpacity>
         </View>
       </View>
