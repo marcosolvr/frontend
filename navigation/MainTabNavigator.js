@@ -13,7 +13,6 @@ import PerfilScreen from '../screens/perfil';
 
 const defaultTabBarOption = {
   activeTintColor: colors.primary,
-  inactiveTintColor: colors.gray,
   style: {
     backgroundColor: '#fff',
     borderTopWidth: 0,

@@ -5,17 +5,45 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  AsyncStorage,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { WebBrowser } from 'expo';
 
 import styles from './style';
+import { colors } from '../../constants/Index';
+import api from '../../services/api';
 
-export default class App extends React.Component {
+export default class App extends React.Component {  
   state = {
-    email: 'marcos@abreu.com',
-    senha: 'nvkdlsnv',
+    email: '',
+    password: '',
+    error: '',
   };
+
+  handleSignInPress = async () => {
+    if (this.state.email.length === 0 || this.state.password.length === 0) {
+      this.setState({ error: 'Preencha usuário e senha para continuar!' }, () => false);
+    } else {
+      try {
+        const response = await api.get(`/auth/login`, {
+          params: {
+            email: this.state.email,
+            password: this.state.password
+          }
+        });
+
+        const { token } = response.data;
+
+        await AsyncStorage.setItem('@Biblib:token', token);
+
+        this.props.navigation.navigate('Main', { token: token });
+        
+      } catch(err) {
+        this.setState({ error: 'Houve um problema com o login, verifique suas credenciais!' });
+      }
+    }
+  }
 
   _handlePressButtonSocial = async () => {
     let result = await WebBrowser.openBrowserAsync('https://expo.io');
@@ -25,8 +53,8 @@ export default class App extends React.Component {
     this.setState({ email: text });
   }
 
-  handlerChangeSenha = (text) => {
-    this.setState({ senha: text });
+  handlerChangePassword = (text) => {
+    this.setState({ password: text });
   }
 
   _cadastrar = () => {
@@ -53,16 +81,16 @@ export default class App extends React.Component {
         <TextInput
           style={styles.input}
           placeholder="Senha"
-          value={this.state.senha}
-          onChangeText={this.handlerChangeSenha}
+          value={this.state.password}
+          onChangeText={this.handlerChangePassword}
           autoCapitalize="none"
           autoCorret={false}
           secureTextEntry
         />
 
-        <Text style={styles.errorMessage}>Ocorreu algum problema no login.</Text>
+        <Text style={styles.errorMessage}>{ this.state.error }</Text>
 
-        <TouchableOpacity onPress={() => {}} style={styles.button}>
+        <TouchableOpacity onPress={this.handleSignInPress} style={styles.button}>
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
 
@@ -74,14 +102,14 @@ export default class App extends React.Component {
               style={{ marginRight: 30 }}
               name="logo-facebook"
               size={50}
-              color="#7c80f8"
+              color={colors.secondary}
             />
           </TouchableOpacity>
           <TouchableOpacity>
             <Ionicons
               name="logo-google"
               size={50}
-              color="#7c80f8"
+              color={colors.secondary}
             />
           </TouchableOpacity>
         </View>
