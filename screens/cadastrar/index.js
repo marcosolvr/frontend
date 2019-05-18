@@ -8,25 +8,47 @@ import {
 } from 'react-native';
 
 import styles from './style';
+import api from '../../services/api';
 
 export default class App extends React.Component {
   state = {
-    username: 'marcos',
-    email: 'marcos@abreu.com',
-    senha: 'nvkdlsnv',
-    senhaDois: 'nvkdjl',
+    username: '',
+    email: '',
+    password: '',
+    password2: '',
+    error: '',
   };
+
+  handlerSignUpPress = async () => {
+    if (this.state.username.length === 0 || this.state.email.length === 0 || this.state.password.length === 0 || this.state.password2.length === 0) {
+      this.setState({ error: 'Todos os campos precisam ser preenchidos!' }, () => false);
+    } else {
+      try {
+        const response = await api.post(`/auth/register`, {
+          email: this.state.email,
+          password: this.state.password,
+          password2: this.state.password2,
+          username: this.state.username
+        });
+
+        this.props.navigation.navigate('Login');
+
+      } catch(err) {
+        this.setState({ error: 'Houve um problema com o cadastro, verifique suas credenciais!' });
+      }
+    }
+  }
 
   handlerChangeEmail = (text) => {
     this.setState({ email: text });
   }
 
-  handlerChangeSenha = (text) => {
-    this.setState({ senha: text });
+  handlerChangePassword = (text) => {
+    this.setState({ password: text });
   }
 
-  handlerChangeSenhaDois = (text) => {
-    this.setState({ senhaDois: text });
+  handlerChangePassword2 = (text) => {
+    this.setState({ password2: text });
   }
 
   handlerChangeUsername = (text) => {
@@ -66,8 +88,8 @@ export default class App extends React.Component {
         <TextInput
           style={styles.input}
           placeholder="Senha"
-          value={this.state.senha}
-          onChangeText={this.handlerChangeSenha}
+          value={this.state.password}
+          onChangeText={this.handlerChangePassword}
           autoCapitalize="none"
           autoCorret={false}
           secureTextEntry
@@ -76,16 +98,19 @@ export default class App extends React.Component {
         <TextInput
           style={styles.input}
           placeholder="Repita sua senha"
-          value={this.state.senhaDois}
-          onChangeText={this.handlerChangeSenhaDois}
+          value={this.state.password2}
+          onChangeText={this.handlerChangePassword2}
           autocapitalize="none"
           autoCorrect={false}
           secureTextEntry
         />
 
-        <Text style={styles.errorMessage}>Ocorreu algum problema no cadastro.</Text>
+        <Text style={styles.errorMessage}>{this.state.error}</Text>
 
-        <TouchableOpacity onPress={() => {}} style={styles.button}>
+        <TouchableOpacity 
+          onPress={this.handlerSignUpPress} 
+          style={styles.button}
+        >
           <Text style={styles.buttonText}>CRIAR CONTA</Text>
         </TouchableOpacity>
 
