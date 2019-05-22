@@ -1,16 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
-import { metrics, fonts, colors } from '../../constants/Index';
+import { metrics, fonts, colors } from "../../constants/Index";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: metrics.padding,
-    marginTop: metrics.statusBarMargin,
+    marginTop: metrics.statusBarMargin
   },
   logo: {
-    alignSelf: 'center',
-    marginVertical: 70,
+    alignSelf: "center",
+    marginVertical: 70
   },
   input: {
     height: metrics.inputHeight,
@@ -18,48 +18,48 @@ const styles = StyleSheet.create({
     borderRadius: metrics.defaultBorderRadius,
     paddingHorizontal: metrics.inputPaddingHorizontal,
     marginBottom: 20,
-    fontSize: fonts.regular,
+    fontSize: fonts.regular
   },
   button: {
     height: metrics.inputHeight,
     backgroundColor: colors.primary,
     borderRadius: metrics.defaultBorderRadius,
     marginTop: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center"
   },
   buttonText: {
     color: colors.light,
-    fontWeight: 'bold',
-    fontSize: fonts.regular,
+    fontWeight: "bold",
+    fontSize: fonts.regular
   },
   errorMessage: {
     fontSize: fonts.regular,
     color: colors.errorText,
-    textAlign: 'center',
+    textAlign: "center"
   },
   alternativasTitle: {
     fontSize: fonts.bigger,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginVertical: 30,
-    color: colors.dark,
+    color: colors.dark
   },
   socialLogin: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center"
   },
   criarContaText: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 25,
-    justifyContent: 'center',
-    fontSize: fonts.regular,
+    justifyContent: "center",
+    fontSize: fonts.regular
   },
   criarContaButton: {
     color: colors.secondary,
     marginLeft: 5,
-    fontSize: fonts.regular,
-  },
+    fontSize: fonts.regular
+  }
 });
 
 export default styles;

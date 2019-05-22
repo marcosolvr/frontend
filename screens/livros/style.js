@@ -6,9 +6,32 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: metrics.padding
   },
+  headerScreenLivros: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
   titleScreen: {
-    fontSize: fonts.bigger,
-    marginBottom: 20
+    fontSize: fonts.bigger
+  },
+  adicionarButton: {
+    backgroundColor: colors.secondary,
+    width: 100,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: metrics.defaultBorderRadius
+  },
+  adicionarButtonText: {
+    fontSize: fonts.regular,
+    color: colors.light
+  },
+  inputPesquisar: {
+    backgroundColor: colors.gray,
+    height: metrics.inputHeight,
+    backgroundColor: colors.gray,
+    borderRadius: metrics.defaultBorderRadius,
+    paddingHorizontal: metrics.inputPaddingHorizontal,
+    marginVertical: 20
   },
   messageBooksEmpty: {
     fontSize: fonts.regular,

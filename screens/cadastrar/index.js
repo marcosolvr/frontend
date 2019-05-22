@@ -1,27 +1,36 @@
-import React from 'react';
+import React from "react";
 import {
   Text,
   View,
   TextInput,
   TouchableOpacity,
   Image,
-} from 'react-native';
+  AsyncStorage
+} from "react-native";
 
-import styles from './style';
-import api from '../../services/api';
+import styles from "./style";
+import api from "../../services/api";
 
 export default class App extends React.Component {
   state = {
-    username: '',
-    email: '',
-    password: '',
-    password2: '',
-    error: '',
+    username: "",
+    email: "",
+    password: "",
+    password2: "",
+    error: ""
   };
 
   handlerSignUpPress = async () => {
-    if (this.state.username.length === 0 || this.state.email.length === 0 || this.state.password.length === 0 || this.state.password2.length === 0) {
-      this.setState({ error: 'Todos os campos precisam ser preenchidos!' }, () => false);
+    if (
+      this.state.username.length === 0 ||
+      this.state.email.length === 0 ||
+      this.state.password.length === 0 ||
+      this.state.password2.length === 0
+    ) {
+      this.setState(
+        { error: "Todos os campos precisam ser preenchidos!" },
+        () => false
+      );
     } else {
       try {
         const response = await api.post(`/auth/register`, {
@@ -31,42 +40,48 @@ export default class App extends React.Component {
           username: this.state.username
         });
 
-        this.props.navigation.navigate('Login');
+        const { token } = response.data;
 
-      } catch(err) {
-        this.setState({ error: 'Houve um problema com o cadastro, verifique suas credenciais!' });
+        await AsyncStorage.setItem("@Biblib:token", token);
+
+        this.props.navigation.navigate("Main");
+      } catch (err) {
+        this.setState({
+          error: "Houve um problema com o cadastro, verifique suas credenciais!"
+        });
+        console.log("deu ruim ______________", err);
       }
     }
-  }
+  };
 
-  handlerChangeEmail = (text) => {
+  handlerChangeEmail = text => {
     this.setState({ email: text });
-  }
+  };
 
-  handlerChangePassword = (text) => {
+  handlerChangePassword = text => {
     this.setState({ password: text });
-  }
+  };
 
-  handlerChangePassword2 = (text) => {
+  handlerChangePassword2 = text => {
     this.setState({ password2: text });
-  }
+  };
 
-  handlerChangeUsername = (text) => {
+  handlerChangeUsername = text => {
     this.setState({ username: text });
-  }
+  };
 
   _login = () => {
-    this.props.navigation.navigate('Login');
-  }
+    this.props.navigation.navigate("Login");
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <Image
           style={styles.logo}
-          source={require('../../assets/images/logo.png')}
+          source={require("../../assets/images/logo.png")}
         />
-        
+
         <TextInput
           style={styles.input}
           placeholder="Nome de usuário"
@@ -107,8 +122,8 @@ export default class App extends React.Component {
 
         <Text style={styles.errorMessage}>{this.state.error}</Text>
 
-        <TouchableOpacity 
-          onPress={this.handlerSignUpPress} 
+        <TouchableOpacity
+          onPress={this.handlerSignUpPress}
           style={styles.button}
         >
           <Text style={styles.buttonText}>CRIAR CONTA</Text>
@@ -116,9 +131,7 @@ export default class App extends React.Component {
 
         <View style={styles.fazerLoginText}>
           <Text>Já possui uma conta?</Text>
-          <TouchableOpacity
-            onPress={this._login}
-          >
+          <TouchableOpacity onPress={this._login}>
             <Text style={styles.fazerLoginButton}>Fazer login.</Text>
           </TouchableOpacity>
         </View>

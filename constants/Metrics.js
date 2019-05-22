@@ -1,11 +1,10 @@
-import { Constants } from 'expo';
+import { Constants } from "expo";
 
 export default {
-  padding: 15,
+  padding: 20,
   statusBarMargin: Constants.statusBarHeight,
   defaultBorderRadius: 23,
 
   inputHeight: 45,
-  inputPaddingHorizontal: 20,
+  inputPaddingHorizontal: 20
 };
-
