@@ -45,17 +45,20 @@ const styles = StyleSheet.create({
     marginVertical: 20
   },
   borderThumbBook: {
-    marginRight: 10,
     overflow: "hidden",
     width: 128,
-    height: 190,
+    height: 180,
     borderRadius: 10
   },
   thumbBook: {
     position: "absolute",
     width: 128,
-    height: 190,
+    height: 180,
     borderRadius: 10
+  },
+  detailsBook: {
+    marginRight: 10,
+    marginBottom: 30
   },
   detailsBookTitle: {
     width: 128,

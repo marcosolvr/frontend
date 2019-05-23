@@ -10,6 +10,8 @@ import TabBarIcon from "../components/TabBarIcon";
 import InicioScreen from "../screens/livros";
 import DescobrirScreen from "../screens/descobrir";
 import PerfilScreen from "../screens/perfil";
+import BookAddScreen from "../screens/bookAdd";
+import DetailsBookScreen from "../screens/detailsBook";
 
 const defaultTabBarOption = {
   activeTintColor: colors.primary,
@@ -25,7 +27,9 @@ const defaultTabBarOption = {
 };
 
 const InicioStack = createStackNavigator({
-  Inicio: InicioScreen
+  Inicio: InicioScreen,
+  BookAdd: BookAddScreen,
+  DetailsBook: DetailsBookScreen
 });
 
 InicioStack.navigationOptions = {

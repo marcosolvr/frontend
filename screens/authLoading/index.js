@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivityIndicator, AsyncStorage, StatusBar, View } from "react-native";
+import { ActivityIndicator, AsyncStorage, View } from "react-native";
 
 export default class AuthLoading extends React.Component {
   constructor(props) {
@@ -17,7 +17,6 @@ export default class AuthLoading extends React.Component {
     return (
       <View>
         <ActivityIndicator />
-        <StatusBar barStyle="default" />
       </View>
     );
   }

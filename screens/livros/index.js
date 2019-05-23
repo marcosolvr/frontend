@@ -24,35 +24,56 @@ export default class Livros extends React.Component {
         url:
           "https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/The_Fellowship_of_the_Ring_cover.gif/220px-The_Fellowship_of_the_Ring_cover.gif",
         title: "Senhor dos Anéis e Tudo e Tals",
-        author: "João Ricardo Rico dos Tolkiens"
+        author: "João Ricardo Rico dos Tolkiens",
+        status: 3
       },
       {
         id: 2,
         url:
           "https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/The_Fellowship_of_the_Ring_cover.gif/220px-The_Fellowship_of_the_Ring_cover.gif",
         title: "Senhor dos Anéis e Tudo e Tals",
-        author: "João Ricardo Rico dos Tolkiens"
+        author: "João Ricardo Rico dos Tolkiens",
+        status: 0
       },
       {
         id: 3,
         url:
           "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
         title: "Senhor dos Anéis e Tudo e Tals",
-        author: "João Ricardo Rico dos Tolkiens"
+        author: "João Ricardo Rico dos Tolkiens",
+        status: 1
       },
       {
         id: 4,
         url:
           "https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/The_Fellowship_of_the_Ring_cover.gif/220px-The_Fellowship_of_the_Ring_cover.gif",
         title: "Senhor dos Anéis e Tudo e Tals",
-        author: "João Ricardo Rico dos Tolkiens"
+        author: "João Ricardo Rico dos Tolkiens",
+        status: 2
       },
       {
         id: 5,
         url:
           "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
         title: "Senhor dos Anéis e Tudo e Tals",
-        author: "João Ricardo Rico dos Tolkiens"
+        author: "João Ricardo Rico dos Tolkiens",
+        status: 3
+      },
+      {
+        id: 6,
+        url:
+          "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        title: "Senhor dos Anéis e Tudo e Tals",
+        author: "João Ricardo Rico dos Tolkiens",
+        status: 0
+      },
+      {
+        id: 7,
+        url:
+          "https://books.google.com/books?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        title: "Senhor dos Anéis e Tudo e Tals",
+        author: "João Ricardo Rico dos Tolkiens",
+        status: 1
       }
     ]
   };
@@ -63,7 +84,10 @@ export default class Livros extends React.Component {
         <View style={styles.container}>
           <View style={styles.headerScreenLivros}>
             <Text style={styles.titleScreen}>Meus Livros</Text>
-            <TouchableOpacity style={styles.adicionarButton} onPress={() => {}}>
+            <TouchableOpacity
+              style={styles.adicionarButton}
+              onPress={() => this.props.navigation.navigate("BookAdd")}
+            >
               <Text style={styles.adicionarButtonText}>Adicionar</Text>
             </TouchableOpacity>
           </View>
@@ -74,58 +98,18 @@ export default class Livros extends React.Component {
           />
 
           <View style={styles.booksList}>
-            <Text style={styles.booksListTite}>Lendo</Text>
             <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
               data={this.state.books}
+              numColumns={3}
               keyExtractor={item => item.id.toString()}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => {}}>
-                  <View style={styles.borderThumbBook}>
-                    <Image
-                      style={styles.thumbBook}
-                      source={{ uri: item.url }}
-                    />
-                  </View>
-                  <View style={styles.detailsBook}>
-                    <Text style={styles.detailsBookTitle}>{item.title}</Text>
-                    <Text style={styles.detailsBookAuthor}>{item.author}</Text>
-                  </View>
-                </TouchableOpacity>
-              )}
-            />
-
-            <Text style={styles.booksListTite}>Lendo</Text>
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={this.state.books}
-              keyExtractor={item => item.id.toString()}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => {}}>
-                  <View style={styles.borderThumbBook}>
-                    <Image
-                      style={styles.thumbBook}
-                      source={{ uri: item.url }}
-                    />
-                  </View>
-                  <View style={styles.detailsBook}>
-                    <Text style={styles.detailsBookTitle}>{item.title}</Text>
-                    <Text style={styles.detailsBookAuthor}>{item.author}</Text>
-                  </View>
-                </TouchableOpacity>
-              )}
-            />
-
-            <Text style={styles.booksListTite}>Lendo</Text>
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={this.state.books}
-              keyExtractor={item => item.id.toString()}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate("DetailsBook", {
+                      title: item.title
+                    })
+                  }
+                >
                   <View style={styles.borderThumbBook}>
                     <Image
                       style={styles.thumbBook}
